@@ -1,0 +1,36 @@
+name: Build ZIP
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create ZIP archive
+        run: |
+          zip -r guess-the-number.zip . \
+            -x ".git/*" \
+               ".github/*" \
+               ".pytest_cache/*" \
+               "__pycache__/*" \
+               "**/__pycache__/*" \
+               ".mypy_cache/*" \
+               ".ruff_cache/*" \
+               ".venv/*" \
+               "venv/*" \
+               "dist/*" \
+               "build/*"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: guess-the-number-zip
+          path: guess-the-number.zip
+          if-no-files-found: error
