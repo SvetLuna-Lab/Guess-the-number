@@ -50,7 +50,7 @@ def ask_play_again(
             return True
         if s in ("нет", "н", "n", "no"):
             return False
-        output_func("Пожалуйста, ответьте 'да' или 'нет'.")
+        output_func('Введите "да" или "нет".')
 
 
 def play_one_round(
@@ -109,3 +109,8 @@ def run_game(
         if not ask_play_again(input_func=input_func, output_func=output_func):
             output_func("Спасибо, что играли в числовую угадайку. Еще увидимся...")
             break
+
+
+if __name__ == "__main__":
+    run_game()
+
